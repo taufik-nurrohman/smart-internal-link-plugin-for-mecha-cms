@@ -1,0 +1,71 @@
+### Article
+
+Lorem ipsum dolor {{article.link:demo}} sit amet.  
+Lorem ipsum dolor {{article.link:demo#hash}} sit amet.  
+Lorem ipsum dolor {{article.link:demo?query}} sit amet.  
+
+Lorem ipsum dolor {{article.link:demo}}foo{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:demo#hash}}foo{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:demo?query}}foo{{/article}} sit amet.  
+
+Lorem ipsum dolor {{article.link:demo}}{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:demo#hash}}{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:demo?query}}{{/article}} sit amet.  
+
+### Page
+
+Lorem ipsum dolor {{page.link:about}} sit amet.  
+Lorem ipsum dolor {{page.link:about#hash}} sit amet.  
+Lorem ipsum dolor {{page.link:about?query}} sit amet.  
+
+Lorem ipsum dolor {{page.link:about}}foo{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:about#hash}}foo{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:about?query}}foo{{/page}} sit amet.  
+
+Lorem ipsum dolor {{page.link:about}}{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:about#hash}}{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:about?query}}{{/page}} sit amet.  
+
+---
+
+### Broken Article
+
+Lorem ipsum dolor {{article.link:foo-bar-baz}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz#hash}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz?query}} sit amet.  
+
+Lorem ipsum dolor {{article.link:foo-bar-baz}}foo{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz#hash}}foo{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz?query}}foo{{/article}} sit amet.  
+
+Lorem ipsum dolor {{article.link:foo-bar-baz}}{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz#hash}}{{/article}} sit amet.  
+Lorem ipsum dolor {{article.link:foo-bar-baz?query}}{{/article}} sit amet.  
+
+### Broken Page
+
+Lorem ipsum dolor {{page.link:foo-bar-baz}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz#hash}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz?query}} sit amet.  
+
+Lorem ipsum dolor {{page.link:foo-bar-baz}}foo{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz#hash}}foo{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz?query}}foo{{/page}} sit amet.  
+
+Lorem ipsum dolor {{page.link:foo-bar-baz}}{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz#hash}}{{/page}} sit amet.  
+Lorem ipsum dolor {{page.link:foo-bar-baz?query}}{{/page}} sit amet.  
+
+### Escape
+
+Lorem ipsum dolor `{{article.link:demo}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo#hash}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo?query}}` sit amet.  
+
+Lorem ipsum dolor `{{article.link:demo}}foo{{/article}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo#hash}}foo{{/article}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo?query}}foo{{/article}}` sit amet.  
+
+Lorem ipsum dolor `{{article.link:demo}}{{/article}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo#hash}}{{/article}}` sit amet.  
+Lorem ipsum dolor `{{article.link:demo?query}}{{/article}}` sit amet. 

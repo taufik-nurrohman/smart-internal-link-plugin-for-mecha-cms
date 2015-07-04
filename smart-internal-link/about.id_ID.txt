@@ -1,0 +1,62 @@
+Title: Tautan Internal Pintar
+Author: Taufik Nurrohman
+URL: http://latitudu.com
+Version: 1.0.0
+
+====
+
+> Tautan internal otomatis yang terpelihara.
+
+Plugin ini akan membantu Anda membuat _[hyperlink](https://en.wikipedia.org/wiki/Hyperlink "Hyperlink – Wikipedia")_ otomatis dengan menggunakan _slug_ artikel/halaman statis yang tersedia. Tautan internal yang dibuat nantinya akan datang dengan judul artikel/halaman statis terkait. Plugin ini juga dapat segera memberitahu Anda jika terdapat beberapa tautan internal yang rusak pada halaman tertentu.
+
+#### Untuk Artikel
+
+##### Contoh Kode Pintasan
+
+~~~ .no-highlight
+`{{article.link:article-slug}}`
+`{{article.link:article-slug#hash}}`
+`{{article.link:article-slug?query=string}}`
+
+`{{article.link:article-slug}}teks tautan{{/article}}`
+`{{article.link:article-slug#hash}}teks tautan{{/article}}`
+`{{article.link:article-slug?query=string}}teks tautan{{/article}}`
+~~~
+
+##### Hasil Keluaran
+
+~~~ .html
+<a class="auto-link" href="{{url.article}}article-slug" title="Judulnya">Judulnya</a>
+<a class="auto-link" href="{{url.article}}article-slug#hash" title="Judulnya">Judulnya</a>
+<a class="auto-link" href="{{url.article}}article-slug?query=string" title="Judulnya">Judulnya</a>
+
+<a class="auto-link" href="{{url.article}}article-slug" title="Judulnya">teks tautan</a>
+<a class="auto-link" href="{{url.article}}article-slug#hash" title="Judulnya">teks tautan</a>
+<a class="auto-link" href="{{url.article}}article-slug?query=string" title="Judulnya">teks tautan</a>
+~~~
+
+#### Untuk Halaman Statis
+
+##### Contoh Kode Pintasan
+
+~~~ .no-highlight
+`{{page.link:page-slug}}`
+`{{page.link:page-slug#hash}}`
+`{{page.link:page-slug?query=string}}`
+
+`{{page.link:page-slug}}teks tautan{{/page}}`
+`{{page.link:page-slug#hash}}teks tautan{{/page}}`
+`{{page.link:page-slug?query=string}}teks tautan{{/page}}`
+~~~
+
+##### Hasil Keluaran
+
+~~~ .html
+<a class="auto-link" href="{{url}}page-slug" title="Judulnya">Judulnya</a>
+<a class="auto-link" href="{{url}}page-slug#hash" title="Judulnya">Judulnya</a>
+<a class="auto-link" href="{{url}}page-slug?query=string" title="Judulnya">Judulnya</a>
+
+<a class="auto-link" href="{{url}}page-slug" title="Judulnya">teks tautan</a>
+<a class="auto-link" href="{{url}}page-slug#hash" title="Judulnya">teks tautan</a>
+<a class="auto-link" href="{{url}}page-slug?query=string" title="Judulnya">teks tautan</a>
+~~~
