@@ -25,7 +25,7 @@
                 cancel.innerHTML = editor.grip.config.buttons.cancel;
                 var insert = function() {
                     if (!input.value.length) return false;
-                    var str = '{{' + select.value + '.link:' + input.value.replace(/<.*?>|&(?:[a-z0-9]+|#[0-9]+|#x[a-f0-9]+);/gi, ' ').replace(/[^a-z0-9\-]+/gi, '-').replace(/\-+/g, '-').replace(/^\-|\-$/g, "").toLowerCase() + '}}';
+                    var str = '{{' + select.value + '.link:' + input.value.replace(/<.*?>|&(?:[a-z0-9]+|#[0-9]+|#x[a-f0-9]+);/gi, ' ').replace(/[^#:?=&a-z0-9\-]+/gi, '-').replace(/\-+/g, '-').replace(/^\-|\-$/g, "").toLowerCase() + '}}';
                     if (s.value.length) {
                         editor.grip.wrap(str, '{{/' + select.value + '}}');
                     } else {
