@@ -21,4 +21,4 @@ Filter::add('shortcode', function($content) use($config) {
         $text = isset($matches[4]) && $matches[5] !== "" ? $matches[5] : $data->title;
         return '<a class="auto-link" href="' . $data->url . (isset($matches[3]) ? $matches[3] : "") . '" title="' . strip_tags($data->title) . '">' . $text . '</a>';
     }, $content);
-}, 21);
+});
