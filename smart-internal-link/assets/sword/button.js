@@ -1,7 +1,7 @@
 (function(w, d, base) {
     if (typeof base.composer === "undefined") return;
     var speak = base.languages,
-        title = speak.plugin_smart_internal_link_title;
+        title = speak.plugin_smart_internal_link[0];
     base.composer.button('book plugin-smart-internal-link', {
         title: title,
         click: function(e, editor) {
@@ -11,10 +11,9 @@
                     cancel = d.createElement('button'),
                     input = d.createElement('input'),
                     select = d.createElement('select'),
-                    types = speak.plugin_smart_internal_link_title_types.split(','),
-                    types_o = ['article', 'page'];
-                for (var i in types) {
-                    select.innerHTML += '<option value="' + types_o[i] + '"' + (types_o[i] === base.segment ? ' selected' : "") + '>' + types[i] + '</option>';
+                    scope = speak.plugin_smart_internal_link[1];
+                for (var i in scope) {
+                    select.innerHTML += '<option value="' + i + '"' + (i === base.segment ? ' selected' : "") + '>' + scope[i] + '</option>';
                 }
                 input.type = 'text';
                 input.placeholder = title.toLowerCase().replace(/[^a-z0-9\-]+/g, '-').replace(/^-+|-+$/, "");
@@ -27,7 +26,13 @@
                     if (!input.value.length) return false;
                     var str = '{{' + select.value + '.link:' + input.value.replace(/<.*?>|&(?:[a-z0-9]+|#[0-9]+|#x[a-f0-9]+);/gi, ' ').replace(/[^#:?=&a-z0-9\-]+/gi, '-').replace(/\-+/g, '-').replace(/^\-|\-$/g, "").toLowerCase() + '}}';
                     if (s.value.length) {
-                        editor.grip.wrap(str, '{{/' + select.value + '}}');
+                        editor.grip.wrap(str, '{{/' + select.value + '}}', function() {
+                            // Braces are not allowed in the link text
+                            var noop = function() {};
+                            editor.grip.replace(/\{/g, '&#123;', noop);
+                            editor.grip.replace(/\}/g, '&#125;', noop);
+                            editor.grip.updateHistory();
+                        });
                     } else {
                         editor.grip.insert(str);
                     }
@@ -62,10 +67,7 @@
             });
         }
     });
-    // MTE & HTE >= 1.4.0
-    if (typeof base.composer.shortcut === "function") {
-        base.composer.shortcut('CTRL+SHIFT+76', function() {
-            return base.composer.grip.config.buttons['book plugin-smart-internal-link'].click(false, base.composer), false;
-        });
-    }
+    base.composer.shortcut('CTRL+SHIFT+76', function() {
+        return base.composer.grip.config.buttons['book plugin-smart-internal-link'].click(false, base.composer), false;
+    });
 })(window, document, DASHBOARD);
