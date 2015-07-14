@@ -16,7 +16,7 @@
                     select.innerHTML += '<option value="' + i + '"' + (i === base.segment ? ' selected' : "") + '>' + scope[i] + '</option>';
                 }
                 input.type = 'text';
-                input.placeholder = title.toLowerCase().replace(/[^a-z0-9\-]+/g, '-').replace(/^-+|-+$/, "");
+                input.placeholder = base.task.slug(title.toLowerCase());
                 modal.children[0].innerHTML = title;
                 modal.children[1].appendChild(input);
                 modal.children[1].appendChild(select);
@@ -24,7 +24,7 @@
                 cancel.innerHTML = editor.grip.config.buttons.cancel;
                 var insert = function() {
                     if (!input.value.length) return false;
-                    var str = '{{' + select.value + '.link:' + input.value.replace(/<.*?>|&(?:[a-z0-9]+|#[0-9]+|#x[a-f0-9]+);/gi, ' ').replace(/[^#:?=&a-z0-9\-]+/gi, '-').replace(/\-+/g, '-').replace(/^\-|\-$/g, "").toLowerCase() + '}}';
+                    var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9') + '}}';
                     if (s.value.length) {
                         editor.grip.wrap(str, '{{/' + select.value + '}}', function() {
                             // Braces are not allowed in the link text

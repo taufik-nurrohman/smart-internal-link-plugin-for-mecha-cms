@@ -1,10 +1,7 @@
 <?php
 
 Filter::add('shortcode', function($content) use($config) {
-    if(
-        strpos($content, '{{article.link:') === false &&
-        strpos($content, '{{page.link:') === false
-    ) {
+    if( ! Text::check('{{article.link:', '{{page.link:')->in($content)) {
         return $content;
     }
     $speak = Config::speak();
