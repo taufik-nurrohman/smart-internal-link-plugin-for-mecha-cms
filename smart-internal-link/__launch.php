@@ -25,8 +25,8 @@ $title = Config::speak('plugin_smart_internal_link_title');
 if($file = File::exist(PLUGIN . DS . File::B(__DIR__) . DS . 'log')) {
     Config::merge('manager_menu', array(
         $title => array(
-            'url' => $config->manager->slug . '/plugin/' . File::B(__DIR__),
             'icon' => 'exclamation-triangle',
+            'url' => $config->manager->slug . '/plugin/' . File::B(__DIR__),
             'count' => count(glob($file . DS . '*' . DS . '*.log', GLOB_NOSORT))
         )
     ));
