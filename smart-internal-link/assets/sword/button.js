@@ -1,6 +1,6 @@
 (function(w, d, base) {
     if (!base.composer) return;
-    var speak = base.languages,
+    var speak = base.languages.MTE,
         name = 'book plugin-smart-internal-link',
         title = speak.plugin_smart_internal_link[0];
     base.composer.button(name, {
@@ -21,8 +21,8 @@
                 header.innerHTML = title;
                 content.appendChild(input);
                 content.appendChild(select);
-                ok.innerHTML = editor.grip.config.buttons.ok;
-                cancel.innerHTML = editor.grip.config.buttons.cancel;
+                ok.innerHTML = speak.buttons.ok;
+                cancel.innerHTML = speak.buttons.cancel;
                 var insert = function() {
                     if (!input.value.length) return false;
                     var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9-') + '}}';

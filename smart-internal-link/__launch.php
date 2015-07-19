@@ -39,7 +39,7 @@ if($file = File::exist(PLUGIN . DS . File::B(__DIR__) . DS . 'log')) {
 }
 
 // Define JS languages ...
-Config::merge('DASHBOARD.languages', array(
+Config::merge('DASHBOARD.languages.MTE', array(
     'plugin_smart_internal_link' => array(
         0 => $title,
         1 => array(
