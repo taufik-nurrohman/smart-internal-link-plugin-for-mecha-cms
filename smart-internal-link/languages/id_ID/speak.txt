@@ -1,3 +1,3 @@
 plugin_smart_internal_link_title: Tautan Internal Pintar
-plugin_smart_internal_link_title_broken_log: Sebuah gerbang rusak telah ditemukan di "%1$s" => "%2$s"
+plugin_smart_internal_link_title_broken_log: Sebuah gerbang rusak telah ditemukan di "%1$s"
 plugin_smart_internal_link_title_broken_label: tautan rusak
