@@ -1,6 +1,7 @@
 <?php
 
-Filter::add('shortcode', function($content) use($config, $speak) {
+function do_smart_internal_link($content) {
+    global $config, $speak;
     $pages = glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR);
     $shortcode_prefix = array();
     foreach($pages as &$page) {
@@ -28,4 +29,7 @@ Filter::add('shortcode', function($content) use($config, $speak) {
         $suffix = isset($matches[3]) ? $matches[3] : "";
         return '<a class="auto-link" href="' . $data->url . $suffix . '" title="' . Text::parse($data->title . ($suffix ? $config->title_separator . $suffix : ""), '->text') . '">' . $text . '</a>';
     }, $content);
-}, 21);
+}
+
+// Apply `do_smart_internal_link` filter
+Filter::add('shortcode', 'do_smart_internal_link', 21);
