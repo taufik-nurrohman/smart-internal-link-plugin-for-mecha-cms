@@ -18,7 +18,7 @@ function do_smart_internal_link($content) {
             return $matches[0];
         }
         if( ! $data = call_user_func('Get::' . $matches[1] . 'Anchor', $matches[2])) {
-            // Create error log file of broken links
+            // Create error log file of broken link(s)
             if($config->page_type !== 'manager') {
                 File::write(sprintf($speak->plugin_smart_internal_link_title_broken_log, $config->url_current))->saveTo(__DIR__ . DS . 'log' . DS . 'posts' . DS . $matches[1] . DS . $matches[2] . '.' . md5($config->url_current) . '.log', 0600);
             }
