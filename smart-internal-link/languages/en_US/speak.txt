@@ -1,3 +1,6 @@
-plugin_smart_internal_link_title: Smart Internal Link
-plugin_smart_internal_link_title_broken_log: Found a broken gate in "%1$s"
-plugin_smart_internal_link_title_broken_label: link broken
+plugin_smart_internal_link:
+  title:
+    title: Smart Internal Link
+    link: link broken
+  description:
+    log: Found a broken gate in "%1$s"

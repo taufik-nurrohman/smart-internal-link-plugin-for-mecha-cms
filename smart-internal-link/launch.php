@@ -20,9 +20,9 @@ function do_smart_internal_link($content) {
         if( ! $data = call_user_func('Get::' . $matches[1] . 'Anchor', $matches[2])) {
             // Create error log file of broken link(s)
             if($config->page_type !== 'manager') {
-                File::write(sprintf($speak->plugin_smart_internal_link_title_broken_log, $config->url_current))->saveTo(__DIR__ . DS . 'log' . DS . 'posts' . DS . $matches[1] . DS . $matches[2] . '.' . md5($config->url_current) . '.log', 0600);
+                File::write(sprintf($speak->plugin_smart_internal_link->description->log, $config->url_current))->saveTo(__DIR__ . DS . 'log' . DS . 'posts' . DS . $matches[1] . DS . $matches[2] . '.' . md5($config->url_current) . '.log', 0600);
             }
-            return '<s class="text-error" title="' . $speak->plugin_smart_internal_link_title_broken_label . '">' . (isset($matches[4]) && $matches[5] !== "" ? $matches[5] : $speak->plugin_smart_internal_link_title_broken_label) . '</s>';
+            return '<s class="text-error" title="' . $speak->plugin_smart_internal_link->title->link . '">' . (isset($matches[4]) && $matches[5] !== "" ? $matches[5] : $speak->plugin_smart_internal_link->title->link) . '</s>';
         }
         $text = isset($matches[4]) && $matches[5] !== "" ? $matches[5] : $data->title;
         $text = str_replace(array('&#123;', '&#125;'), array('{', '}'), $text);

@@ -21,7 +21,7 @@ Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/kill', 
  * ---------------------
  */
 
-$_title = $speak->plugin_smart_internal_link_title;
+$_title = $speak->plugin_smart_internal_link->title->title;
 if($file = File::exist(__DIR__ . DS . 'log')) {
     Config::merge('manager_menu', array(
         $_title => array(
