@@ -21,10 +21,10 @@ Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/kill', 
  * ---------------------
  */
 
-$_title = $speak->plugin_smart_internal_link->title->title;
+$_title = (array) $speak->plugin_smart_internal_link->title->title;
 if($file = File::exist(__DIR__ . DS . 'log')) {
     Config::merge('manager_menu', array(
-        $_title => array(
+        $_title[0] => array(
             'icon' => 'exclamation-triangle',
             'url' => $config->manager->slug . '/plugin/' . File::B(__DIR__),
             'count' => count(glob($file . DS . 'posts' . DS . '*' . DS . '*.log', GLOB_NOSORT))
@@ -38,14 +38,12 @@ foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $_page) {
     $_page = File::B($_page);
     $_options[$_page] = isset($speak->{$_page}) ? $speak->{$_page} : Text::parse($_page, '->title');
 }
-Config::merge('DASHBOARD.languages.MTE', array(
-    'plugin_smart_internal_link' => array(
-        0 => $_title,
-        1 => $_options
-    )
+Config::merge('DASHBOARD.languages.MTE.plugin_smart_internal_link', array(
+    0 => $_title,
+    1 => $_options
 ));
 
 // Add editor toolbar button for this plugin ...
 Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
-    echo Asset::javascript(__DIR__ . DS . 'assets' . DS . 'sword' . DS . 'button.js');
+    echo Asset::javascript(__DIR__ . DS . 'assets' . DS . 'sword' . DS . 'button.js', "", 'sword/editor.button.' . File::B(__DIR__) . '.min.js');
 }, 20);

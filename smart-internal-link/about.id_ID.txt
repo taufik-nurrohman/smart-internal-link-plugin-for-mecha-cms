@@ -1,7 +1,7 @@
 Title: Tautan Internal Pintar
 Author: Taufik Nurrohman
 URL: http://latitudu.com
-Version: 1.1.2
+Version: 1.2.0
 
 ====
 

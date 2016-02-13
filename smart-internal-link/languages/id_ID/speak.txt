@@ -1,6 +1,8 @@
 plugin_smart_internal_link:
   title:
-    title: Tautan Internal Pintar
+    title:
+      0: Tautan Internal Pintar
+      1: ⌘+⇧+L
     link: tautan rusak
   description:
     log: Sebuah gerbang rusak telah ditemukan di "%1$s"

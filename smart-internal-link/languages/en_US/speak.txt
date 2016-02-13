@@ -1,6 +1,8 @@
 plugin_smart_internal_link:
   title:
-    title: Smart Internal Link
+    title:
+      0: Smart Internal Link
+      1: ⌘+⇧+L
     link: link broken
   description:
     log: Found a broken gate in "%1$s"

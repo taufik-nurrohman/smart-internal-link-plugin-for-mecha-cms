@@ -17,22 +17,21 @@
                     select.innerHTML += '<option value="' + i + '"' + (i === base.segment ? ' selected' : "") + '>' + scope[i] + '</option>';
                 }
                 input.type = 'text';
-                input.placeholder = base.task.slug(title.toLowerCase());
-                header.innerHTML = title;
+                input.placeholder = base.task.slug(title[0].toLowerCase());
+                header.innerHTML = title[0];
                 content.appendChild(input);
                 content.appendChild(select);
-                ok.innerHTML = speak.buttons.ok;
-                cancel.innerHTML = speak.buttons.cancel;
+                ok.innerHTML = speak.actions.ok;
+                cancel.innerHTML = speak.actions.cancel;
                 var insert = function() {
                     if (!input.value.length) return false;
-                    var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9-') + '}}';
+                    var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9') + '}}';
                     if (s.value.length) {
                         editor.grip.wrap(str, '{{/' + select.value + '}}', function() {
                             // Braces are not allowed in the link text
                             var noop = function() {};
                             editor.grip.replace(/\{/g, '&#123;', noop);
-                            editor.grip.replace(/\}/g, '&#125;', noop);
-                            editor.grip.updateHistory();
+                            editor.grip.replace(/\}/g, '&#125;', true);
                         });
                     } else {
                         editor.grip.insert(str);
@@ -40,35 +39,38 @@
                     return false;
                 };
                 editor.event("keydown", input, function(e) {
-                    if (e.keyCode === 13) return insert();
-                    if (e.keyCode === 27) return editor.close(true), false;
-                    if (e.keyCode === 40) return ok.focus(), false;
+                    var k = editor.grip.key(e);
+                    if (k === 'enter') return insert();
+                    if (k === 'escape') return editor.exit(true), false;
+                    if (k === 'arrowdown') return ok.focus(), false;
                 });
                 editor.event("click", ok, insert);
                 editor.event("click", cancel, function() {
-                    return editor.close(true);
+                    return editor.exit(true), false;
                 });
                 editor.event("keydown", ok, function(e) {
-                    if (e.keyCode === 13) return insert();
-                    if (e.keyCode === 27) return editor.close(true), false;
-                    if (e.keyCode === 38) return input.focus(), false;
-                    if (e.keyCode === 39 || e.keyCode === 40) return cancel.focus(), false;
+                    var k = editor.grip.key(e);
+                    if (k === 'enter') return insert();
+                    if (k === 'escape') return editor.exit(true), false;
+                    if (k === 'arrowup') return input.focus(), false;
+                    if (k.match(/^arrow(right|down)$/)) return cancel.focus(), false;
                 });
                 editor.event("keydown", cancel, function(e) {
-                    if (e.keyCode === 13 || e.keyCode === 27) return editor.close(true), false;
-                    if (e.keyCode === 37 || e.keyCode === 38) return ok.focus(), false;
-                    if (e.keyCode === 40) return false;
+                    var k = editor.grip.key(e);
+                    if (k.match(/^enter|escape$/)) return editor.exit(true), false;
+                    if (k.match(/^arrow(left|up)$/)) return ok.focus(), false;
+                    if (k === 'arrowdown') return false;
                 });
                 footer.appendChild(ok);
                 footer.appendChild(cancel);
                 w.setTimeout(function() {
-                    input.focus();
-                    input.select();
-                }, 10);
+                    input.focus(), input.select();
+                }, .2);
             });
         }
     });
-    base.composer.shortcut('CTRL+SHIFT+76', function() {
-        return base.composer.grip.config.buttons[name].click(false, base.composer), false;
+    // `Ctrl + Shift + L` for "smart internal link"
+    base.composer.shortcut('ctrl+shift+l', function() {
+        return base.composer.grip.config.buttons[name].click(null, base.composer), false;
     });
 })(window, document, DASHBOARD);
