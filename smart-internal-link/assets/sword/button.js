@@ -26,17 +26,18 @@
                 var insert = function() {
                     if (!input.value.length) return false;
                     var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9') + '}}';
-                    if (s.value.length) {
-                        editor.grip.wrap(str, '{{/' + select.value + '}}', function() {
-                            // Braces are not allowed in the link text
-                            var noop = function() {};
-                            editor.grip.replace(/\{/g, '&#123;', noop);
-                            editor.grip.replace(/\}/g, '&#125;', true);
-                        });
-                    } else {
-                        editor.grip.insert(str);
-                    }
-                    return false;
+                    return editor.grip.tidy(' ', function() {
+                        if (s.value.length) {
+                            editor.grip.wrap(str, '{{/' + select.value + '}}', function() {
+                                // Braces are not allowed in the link text
+                                editor.grip.replace(/\{/g, '&#123;', function() {
+                                    editor.grip.replace(/\}/g, '&#125;', true);
+                                });
+                            });
+                        } else {
+                            editor.grip.insert(str);
+                        }
+                    }), false;
                 };
                 editor.event("keydown", input, function(e) {
                     var k = editor.grip.key(e);
