@@ -24,8 +24,16 @@
                 ok.innerHTML = speak.actions.ok;
                 cancel.innerHTML = speak.actions.cancel;
                 var insert = function() {
-                    if (!input.value.length) return false;
-                    var str = '{{' + select.value + '.link:' + base.task.slug(input.value.toLowerCase(), '-', '#:?=&a-z0-9') + '}}';
+                    var v = input.value,
+                        x = /^(.*?)([?&#])(.*?)$/.exec(v);
+                    if (!v.length) return false;
+                    if (x && x[1]) {
+                        x[1] = base.task.slug(x[1].toLowerCase());
+                        v = x[1] + x[2] + x[3];
+                    } else {
+                        v = base.task.slug(v.toLowerCase());
+                    }
+                    var str = '{{' + select.value + '.link:' + v + '}}';
                     return editor.grip.tidy(' ', function() {
                         if (s.value.length) {
                             editor.grip.wrap(str, '{{/' + select.value + '}}', function() {

@@ -6,7 +6,7 @@
  * ----------
  */
 
-Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/kill', function() use($config, $speak) {
+Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/do:kill', function() use($config, $speak) {
     if($request = Request::post()) {
         Guardian::checkToken($request['token']);
         File::open(__DIR__ . DS . 'log')->delete();
@@ -21,10 +21,10 @@ Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/kill', 
  * ---------------------
  */
 
-$_title = (array) $speak->plugin_smart_internal_link->title->title;
+$_t = (array) $speak->plugin_smart_internal_link->title->title;
 if($file = File::exist(__DIR__ . DS . 'log')) {
     Config::merge('manager_menu', array(
-        $_title[0] => array(
+        $_t[0] => array(
             'icon' => 'exclamation-triangle',
             'url' => $config->manager->slug . '/plugin/' . File::B(__DIR__),
             'count' => count(glob($file . DS . 'posts' . DS . '*' . DS . '*.log', GLOB_NOSORT))
@@ -33,14 +33,14 @@ if($file = File::exist(__DIR__ . DS . 'log')) {
 }
 
 // Define JS languages ...
-$_options = array();
-foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $_page) {
-    $_page = File::B($_page);
-    $_options[$_page] = isset($speak->{$_page}) ? $speak->{$_page} : Text::parse($_page, '->title');
+$_o = array();
+foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $_p) {
+    $_p = File::B($_p);
+    $_o[$_p] = isset($speak->{$_p}) ? $speak->{$_p} : Text::parse($_p, '->title');
 }
 Config::merge('DASHBOARD.languages.MTE.plugin_smart_internal_link', array(
-    0 => $_title,
-    1 => $_options
+    0 => $_t,
+    1 => $_o
 ));
 
 // Add editor toolbar button for this plugin ...
